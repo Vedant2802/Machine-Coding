@@ -4,39 +4,87 @@ export const FETCH_NEWS_FAILURE = "FETCH_NEWS_FAILURE";
 
 // action creator function
 
-export const fetchNewsRequest = () => {
-  return { type: FETCH_NEWS_REQUEST };
+// export const fetchNewsRequest = () => {
+//   return { type: FETCH_NEWS_REQUEST };
+// };
+
+// export const fetchNewsSuccess = (news) => {
+//   return { type: FETCH_NEWS_SUCCESS, payload: news };
+// };
+
+// export const fetchNewsFailure = (error) => {
+//   return { type: FETCH_NEWS_REQUEST, payload: error };
+// };
+
+// // thunk action creatore
+
+// export const fetchNews = () => {
+//   return function (dispatch) {
+//     dispatch(fetchNewsRequest());
+//     fetch(
+//       "https://newsapi.org/v2/top-headlines?country=us&apiKey=e58115446a8f44e782bae4eb44f448f6"
+//     )
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const news = data.articles.map((article) => {
+//           return {
+//             title: article.title,
+//             url: article.url,
+//             description: article.description,
+//           };
+//         });
+//         dispatch(fetchNewsSuccess(news));
+//       })
+//       .catch((error) => {
+//         dispatch(fetchNewsFailure(error.message));
+//       });
+//   };
+// };
+
+// Revision
+// action creators
+
+const fetchNewsRequest = () => {
+  return {
+    type: FETCH_NEWS_REQUEST,
+  };
 };
 
-export const fetchNewsSuccess = (news) => {
-  return { type: FETCH_NEWS_SUCCESS, payload: news };
+const fetchNewsRequestSuccess = (data) => {
+  return {
+    type: FETCH_NEWS_SUCCESS,
+    payload: data,
+  };
 };
 
-export const fetchNewsFailure = (error) => {
-  return { type: FETCH_NEWS_REQUEST, payload: error };
+const fetchNewsFailure = (data) => {
+  return {
+    type: FETCH_NEWS_FAILURE,
+    payload: data,
+  };
 };
 
-// thunk action creatore
+// action cretor using thunk
 
-export const fetchNews = () => {
-  return function (dispatch) {
+const fetchNewsData = () => {
+  return (dispatch) => {
     dispatch(fetchNewsRequest());
     fetch(
       "https://newsapi.org/v2/top-headlines?country=us&apiKey=e58115446a8f44e782bae4eb44f448f6"
     )
       .then((response) => response.json())
       .then((data) => {
-        const news = data.articles.map((article) => {
+        const filteredData = data.articles.map((article) => {
           return {
             title: article.title,
-            url: article.url,
             description: article.description,
+            author: article.author,
           };
         });
-        dispatch(fetchNewsSuccess(news));
+        dispatch(fetchNewsRequestSuccess(filteredData));
       })
-      .catch((error) => {
-        dispatch(fetchNewsFailure(error.message));
-      });
+      .catch((error) => dispatch(fetchNewsFailure(error.message)));
   };
 };
+
+export default fetchNewsData;
