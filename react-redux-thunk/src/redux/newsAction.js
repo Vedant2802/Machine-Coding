@@ -66,24 +66,46 @@ const fetchNewsFailure = (data) => {
 
 // action cretor using thunk
 
+// const fetchNewsData = () => {
+//   return (dispatch) => {
+//     dispatch(fetchNewsRequest());
+//     fetch(
+//       "https://newsapi.org/v2/top-headlines?country=us&apiKey=e58115446a8f44e782bae4eb44f448f6"
+//     )
+//       .then((response) => response.json())
+//       .then((data) => {
+//         const filteredData = data.articles.map((article) => {
+//           return {
+//             title: article.title,
+//             description: article.description,
+//             author: article.author,
+//           };
+//         });
+//         dispatch(fetchNewsRequestSuccess(filteredData));
+//       })
+//       .catch((error) => dispatch(fetchNewsFailure(error.message)));
+//   };
+// };
+
 const fetchNewsData = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(fetchNewsRequest());
-    fetch(
-      "https://newsapi.org/v2/top-headlines?country=us&apiKey=e58115446a8f44e782bae4eb44f448f6"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const filteredData = data.articles.map((article) => {
-          return {
-            title: article.title,
-            description: article.description,
-            author: article.author,
-          };
-        });
-        dispatch(fetchNewsRequestSuccess(filteredData));
-      })
-      .catch((error) => dispatch(fetchNewsFailure(error.message)));
+    try {
+      const response = await fetch(
+        "https://newsapi.org/v2/top-headlines?country=us&apiKey=e58115446a8f44e782bae4eb44f448f6"
+      );
+      const data = await response.json();
+      const filteredData = data.articles.map((article) => {
+        return {
+          title: article.title,
+          description: article.description,
+          author: article.author,
+        };
+      });
+      dispatch(fetchNewsRequestSuccess(filteredData));
+    } catch (error) {
+      dispatch(fetchNewsFailure(error));
+    }
   };
 };
 
