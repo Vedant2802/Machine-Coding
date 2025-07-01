@@ -1,0 +1,10 @@
+{
+  "name": "redux-thunk-test",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "redux": "^5.0.0",
+    "redux-thunk": "^3.1.0"
+  }
+}
