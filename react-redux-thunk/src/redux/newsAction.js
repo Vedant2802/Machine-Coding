@@ -87,6 +87,9 @@ const fetchNewsFailure = (data) => {
 //   };
 // };
 
+// In Redux:
+// A thunk is a function returned by an action creator, which executes async logic.
+
 const fetchNewsData = () => {
   return async (dispatch) => {
     dispatch(fetchNewsRequest());
