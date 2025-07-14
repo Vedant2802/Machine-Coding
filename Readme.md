@@ -2,7 +2,7 @@
 
 This repository contains multiple JavaScript and React projects focused on machine coding, state management, and UI functionality. Each folder is a self-contained project demonstrating a specific concept or technology.
 
----
+<!-- --- -->
 
 ## Projects
 
