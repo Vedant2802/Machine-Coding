@@ -20,7 +20,7 @@ const data = [
 const selection = document.getElementById("select");
 const section = document.getElementById("section");
 // section.setAttribute("class", "section");
-console.log(selection);
+// console.log(selection);
 selection.addEventListener("change", function (e) {
   const optionIndex = e.target.selectedIndex;
   section.innerHTML = "";
