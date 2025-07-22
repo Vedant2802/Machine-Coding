@@ -4,7 +4,7 @@ const routes = {
   "/myname": "<h2>My Name</h2><p>Hello, Akshat!</p>",
 };
 
-console.log(location.pathname);
+// console.log(location.pathname);
 
 function handleNavigation(path) {
   // 👇 This updates the URL without reloading
