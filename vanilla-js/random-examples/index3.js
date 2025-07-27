@@ -7,7 +7,6 @@ const routes = {
 // console.log(location.pathname);
 
 function handleNavigation(path) {
-  // 👇 This updates the URL without reloading
   history.pushState({ path }, "", path);
   renderContent(path);
   console.log(history.state);
