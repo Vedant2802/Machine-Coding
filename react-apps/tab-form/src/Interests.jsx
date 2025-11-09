@@ -1,7 +1,7 @@
 import React from "react";
 
 function Interests() {
-  return <div>Interets</div>;
+  return <div>Interests</div>;
 }
 
 export default Interests;
