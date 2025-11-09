@@ -3,12 +3,12 @@ import Settings from "./Settings";
 import Interests from "./Interests";
 import Profile from "./Profile";
 
-function Body({ tabToSet }) {
+function Body({ tabToSet, setFormData }) {
   let Component;
 
   switch (tabToSet) {
     case "profile":
-      Component = <Profile />;
+      Component = <Profile setFormData={setFormData} />;
       break;
     case "settings":
       Component = <Settings />;
@@ -17,7 +17,7 @@ function Body({ tabToSet }) {
       Component = <Interests />;
       break;
     default:
-      Component = <Profile />; // fallback
+      Component = <Profile setFormData={setFormData} />; // fallback
   }
 
   return <div>{Component}</div>;
